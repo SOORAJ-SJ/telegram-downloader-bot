@@ -3,9 +3,14 @@ from selenium import webdriver
 import re
 import requests
 from hurry.filesize import filesize
+import chromedriver_binary
 
-
-driver=webdriver.Chrome()
+chrome_options=webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("window-size=1400,2100")
+chrome_options.add_argument("--disable-gpu")
+driver = webdriver.Chrome(chrome_options=chrome_options)
 piratebay_url="https://proxybay.github.io/"
 
 
