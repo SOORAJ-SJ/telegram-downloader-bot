@@ -113,7 +113,7 @@ class Crawler:
         print(driver.title)
         soup = bs(driver.page_source, 'lxml')
         print("All done!")
-        ele = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btn-primary')))
+        ele = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btn-primary')))
         driver.set_page_load_timeout(10)
         driver.execute_script('arguments[0].click();', ele)
         driver.switch_to.window(driver.window_handles[1])
