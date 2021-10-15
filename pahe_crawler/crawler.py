@@ -109,7 +109,6 @@ class Crawler:
         ele.click()
         print("Link generated")
         ele = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'showlink')))
-        time.sleep(2)
         ele.click()
         print("Getting download link ready")
         print(driver.title)
@@ -119,7 +118,11 @@ class Crawler:
         print("All done!")
         page=bs(driver.page_source,'lxml')
         print(page.prettify())
-        ele = WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
+        for i in range(0,3):
+            try:
+                ele = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
+            except:
+                print("Error occured in linegee")
         driver.set_page_load_timeout(10)
         driver.execute_script('arguments[0].click();', ele)
         driver.switch_to.window(driver.window_handles[1])
