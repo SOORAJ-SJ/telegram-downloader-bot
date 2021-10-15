@@ -1,3 +1,5 @@
+import time
+
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,7 +12,6 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 # chrome_options.add_argument("window-size=100,100")
 chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)")
 driver = webdriver.Chrome(chrome_options=chrome_options)
@@ -119,6 +120,7 @@ class Crawler:
         print(page.prettify())
         ele = WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
         driver.set_page_load_timeout(10)
+        time.sleep(2)
         driver.execute_script('arguments[0].click();', ele)
         driver.switch_to.window(driver.window_handles[1])
         print(driver.current_url)
