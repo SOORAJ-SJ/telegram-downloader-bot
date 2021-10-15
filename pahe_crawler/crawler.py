@@ -114,7 +114,6 @@ class Crawler:
         print(driver.title)
         driver.switch_to.window(driver.window_handles[1])
         print(driver.title)
-        soup = bs(driver.page_source, 'lxml')
         print("All done!")
         page=bs(driver.page_source,'lxml')
         print(page.prettify())
