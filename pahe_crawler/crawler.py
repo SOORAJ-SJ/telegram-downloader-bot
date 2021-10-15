@@ -121,6 +121,7 @@ class Crawler:
         for i in range(0,3):
             try:
                 ele = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
+                break
             except:
                 print("Error occured in linegee")
         driver.set_page_load_timeout(10)
