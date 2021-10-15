@@ -114,9 +114,8 @@ class Crawler:
         print(driver.title)
         driver.switch_to.window(driver.window_handles[1])
         print(driver.title)
+        soup = bs(driver.page_source, 'lxml')
         print("All done!")
-        page=bs(driver.page_source,'lxml')
-        print(page.prettify())
         for i in range(0,3):
             try:
                 ele = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
