@@ -122,6 +122,8 @@ class Crawler:
                 break
             except:
                 print("Error occured in linegee")
+                driver.refresh()
+                print("refreshed")
         driver.set_page_load_timeout(10)
         driver.execute_script('arguments[0].click();', ele)
         driver.switch_to.window(driver.window_handles[1])
