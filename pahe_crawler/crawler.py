@@ -12,8 +12,7 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 # chrome_options.add_argument("window-size=100,100")
 chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("user-agent=Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)")
+# chrome_options.add_argument("--disable-dev-shm-usage")
 driver = webdriver.Chrome(chrome_options=chrome_options)
 pahe_url = "https://pahe.ph/"
 print("Agent ",driver.execute_script("return navigator.userAgent"))
@@ -116,14 +115,7 @@ class Crawler:
         print(driver.title)
         soup = bs(driver.page_source, 'lxml')
         print("All done!")
-        for i in range(0,3):
-            try:
-                ele = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
-                break
-            except:
-                print("Error occured in linegee")
-                driver.refresh()
-                print("refreshed")
+        ele = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn-primary')))
         driver.set_page_load_timeout(10)
         driver.execute_script('arguments[0].click();', ele)
         driver.switch_to.window(driver.window_handles[1])
