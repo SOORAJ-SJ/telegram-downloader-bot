@@ -69,7 +69,7 @@ def debrid_list(update, context):
                                                      ),
                                                      telegram.InlineKeyboardButton(
                                                          text='Delete 🚮',
-                                                         callback_data=res['value'][0]['id']
+                                                         callback_data='delete '+res['value'][0]['id']
                                                      )
                                                  ]
                                              ]
