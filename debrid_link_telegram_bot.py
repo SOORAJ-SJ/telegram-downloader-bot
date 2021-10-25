@@ -103,13 +103,13 @@ def debrid_list(update, context):
                                                              ),
                                                              telegram.InlineKeyboardButton(
                                                                  text='Delete 🚮',
-                                                                 callback_data='delete' + item['id']
+                                                                 callback_data='delete ' + item['id']
                                                              ),
                                                          ],
                                                          [
                                                              telegram.InlineKeyboardButton(
                                                                  text='Download individual files ⏬',
-                                                                 callback_data='list' + item['id']
+                                                                 callback_data='list ' + item['id']
                                                              )
                                                          ]
                                                      ]
@@ -267,17 +267,17 @@ def pahe_available_hosts(update, context, hosts):
     for host in available_hosts:
         print(len(host))
         for tags in host:
-            if tags.name=='div':
+            if tags.name == 'div':
                 box_inner_block += 1
                 count = 0
                 kb_group = []
-                size=''
+                size = ''
                 for tag in tags:
                     if tag.string is not None:
-                        if tag.string.rfind("GB")>=0 or tag.string.rfind("MB")>=0:
-                            size=''
-                            size+=tag.string
-                            print("found size",tag.string)
+                        if tag.string.rfind("GB") >= 0 or tag.string.rfind("MB") >= 0:
+                            size = ''
+                            size += tag.string
+                            print("found size", tag.string)
                     if tag.name:
                         count += 1
                         if tag.name in ["span", "b", "strong", "em"]:
@@ -286,8 +286,9 @@ def pahe_available_hosts(update, context, hosts):
                         if len(tag.name) > 8:
                             if 'movies' in hosts.keys():
                                 kb_group.append(
-                                    telegram.InlineKeyboardButton(text=tag.string, callback_data='movies_download ' + str(
-                                        box_inner_block) + ' ' + str(count)))
+                                    telegram.InlineKeyboardButton(text=tag.string,
+                                                                  callback_data='movies_download ' + str(
+                                                                      box_inner_block) + ' ' + str(count)))
                             else:
                                 kb_group.append(
                                     telegram.InlineKeyboardButton(text=tag.string,
@@ -363,14 +364,14 @@ def debrid_callback_handler(update, context):
             context,
             box_inner_block=callback_data[1]
         )
-    if update.callback_query.data[0:6] == 'delete':
+    if callback_data[0] == 'delete':
         debrid_delete(
             update.callback_query.data[6:],
             update,
             context
         )
-    # if:
-    #     list_multiple_files(update.callback_query.data[4:], update, context)
+    if callback_data[0] == 'list':
+        list_multiple_files(update.callback_query.data[4:], update, context)
 
 
 start_handler = CommandHandler('start', start)
