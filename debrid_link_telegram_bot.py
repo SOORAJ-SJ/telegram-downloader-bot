@@ -366,12 +366,12 @@ def debrid_callback_handler(update, context):
         )
     if callback_data[0] == 'delete':
         debrid_delete(
-            update.callback_query.data[6:],
+            callback_data[1],
             update,
             context
         )
     if callback_data[0] == 'list':
-        list_multiple_files(update.callback_query.data[4:], update, context)
+        list_multiple_files(callback_data[1], update, context)
 
 
 start_handler = CommandHandler('start', start)
